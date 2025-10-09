@@ -13,6 +13,7 @@
 		02A90FDF2E9557EC00729113 /* JumeokbapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A90FCF2E9557EC00729113 /* JumeokbapApp.swift */; };
 		02A90FE02E9557EC00729113 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A90FD12E9557EC00729113 /* SettingsView.swift */; };
 		02A90FE12E9557EC00729113 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A90FD22E9557EC00729113 /* TimerManager.swift */; };
+		02A90FEB2E97A11700729113 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02A90FEA2E97A11700729113 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +49,7 @@
 		02A90FD62E9557EC00729113 /* JumeokbappUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumeokbappUITests.swift; sourceTree = "<group>"; };
 		02A90FD72E9557EC00729113 /* JumeokbappUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumeokbappUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		02A90FD92E9557EC00729113 /* JumeokbappTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumeokbappTests.swift; sourceTree = "<group>"; };
-		02A90FDA2E9557EC00729113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		02A90FEA2E97A11700729113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,12 +102,12 @@
 		02A90FD32E9557EC00729113 /* Jumeokbap */ = {
 			isa = PBXGroup;
 			children = (
+				02A90FEA2E97A11700729113 /* Info.plist */,
 				02A90FCB2E9557EC00729113 /* AppDelegate.swift */,
 				02A90FCC2E9557EC00729113 /* Assets.xcassets */,
 				02A90FCD2E9557EC00729113 /* FloatingTimerView.swift */,
 				02A90FCE2E9557EC00729113 /* Jumeokbap.entitlements */,
 				02A90FCF2E9557EC00729113 /* JumeokbapApp.swift */,
-				02A90FDA2E9557EC00729113 /* Info.plist */,
 				02A90FD12E9557EC00729113 /* SettingsView.swift */,
 				02A90FD22E9557EC00729113 /* TimerManager.swift */,
 			);
@@ -252,6 +253,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02A90FEB2E97A11700729113 /* Info.plist in Resources */,
 				02A90FDD2E9557EC00729113 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

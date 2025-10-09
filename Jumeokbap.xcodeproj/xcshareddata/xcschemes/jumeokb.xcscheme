@@ -16,7 +16,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "021010362E954DC000BA02C0"
-               BuildableName = "jumeokb.app"
+               BuildableName = "jumeokbap.app"
                BlueprintName = "jumeokb"
                ReferencedContainer = "container:Jumeokbap.xcodeproj">
             </BuildableReference>
@@ -69,7 +69,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "021010362E954DC000BA02C0"
-            BuildableName = "jumeokb.app"
+            BuildableName = "jumeokbap.app"
             BlueprintName = "jumeokb"
             ReferencedContainer = "container:Jumeokbap.xcodeproj">
          </BuildableReference>
@@ -86,7 +86,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "021010362E954DC000BA02C0"
-            BuildableName = "jumeokb.app"
+            BuildableName = "jumeokbap.app"
             BlueprintName = "jumeokb"
             ReferencedContainer = "container:Jumeokbap.xcodeproj">
          </BuildableReference>

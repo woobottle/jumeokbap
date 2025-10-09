@@ -34,8 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		021010372E954DC000BA02C0 /* jumeokb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jumeokb.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		021010472E954DC100BA02C0 /* jumeokbTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = jumeokbTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		021010372E954DC000BA02C0 /* jumeokbap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jumeokbap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		021010472E954DC100BA02C0 /* jumeokbapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = jumeokbapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		021010512E954DC100BA02C0 /* jumeokbUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = jumeokbUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		02A90FCB2E9557EC00729113 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02A90FCC2E9557EC00729113 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -92,8 +92,8 @@
 		021010382E954DC000BA02C0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				021010372E954DC000BA02C0 /* jumeokb.app */,
-				021010472E954DC100BA02C0 /* jumeokbTests.xctest */,
+				021010372E954DC000BA02C0 /* jumeokbap.app */,
+				021010472E954DC100BA02C0 /* jumeokbapTests.xctest */,
 				021010512E954DC100BA02C0 /* jumeokbUITests.xctest */,
 			);
 			name = Products;
@@ -155,7 +155,7 @@
 			packageProductDependencies = (
 			);
 			productName = jumeokb;
-			productReference = 021010372E954DC000BA02C0 /* jumeokb.app */;
+			productReference = 021010372E954DC000BA02C0 /* jumeokbap.app */;
 			productType = "com.apple.product-type.application";
 		};
 		021010462E954DC100BA02C0 /* jumeokbTests */ = {
@@ -175,7 +175,7 @@
 			packageProductDependencies = (
 			);
 			productName = jumeokbTests;
-			productReference = 021010472E954DC100BA02C0 /* jumeokbTests.xctest */;
+			productReference = 021010472E954DC100BA02C0 /* jumeokbapTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		021010502E954DC100BA02C0 /* jumeokbUITests */ = {
@@ -438,6 +438,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -446,6 +447,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Jumeokbap/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "주먹밥";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -462,7 +465,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.woobottle.jumeokbap;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = jumeokbap;
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
@@ -478,6 +481,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -486,6 +490,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Jumeokbap/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "주먹밥";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -502,7 +508,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.woobottle.jumeokbap;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = jumeokbap;
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
@@ -517,6 +523,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"BUNDLE_LOADER[arch=*]" = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 54L4M92H9T;
@@ -525,13 +532,13 @@
 				MACOSX_DEPLOYMENT_TARGET = 15.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.woobottle.jumeokbTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = jumeokbapTests;
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/jumeokb.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/jumeokb";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/jumeokb.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/jumeokbap";
 				XROS_DEPLOYMENT_TARGET = 2.5;
 			};
 			name = Debug;
@@ -548,13 +555,13 @@
 				MACOSX_DEPLOYMENT_TARGET = 15.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.woobottle.jumeokbTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = jumeokbapTests;
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/jumeokb.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/jumeokb";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/jumeokb.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/jumeokbap";
 				XROS_DEPLOYMENT_TARGET = 2.5;
 			};
 			name = Release;
@@ -576,7 +583,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_TARGET_NAME = jumeokb;
+				TEST_TARGET_NAME = jumeokbap;
 				XROS_DEPLOYMENT_TARGET = 2.5;
 			};
 			name = Debug;
@@ -598,7 +605,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_TARGET_NAME = jumeokb;
+				TEST_TARGET_NAME = jumeokbap;
 				XROS_DEPLOYMENT_TARGET = 2.5;
 			};
 			name = Release;

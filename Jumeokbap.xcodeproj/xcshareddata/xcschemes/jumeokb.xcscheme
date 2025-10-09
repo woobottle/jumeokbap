@@ -36,7 +36,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "021010462E954DC100BA02C0"
-               BuildableName = "jumeokbTests.xctest"
+               BuildableName = "jumeokbapTests.xctest"
                BlueprintName = "jumeokbTests"
                ReferencedContainer = "container:Jumeokbap.xcodeproj">
             </BuildableReference>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>주먹밥 – 플로팅 포커스 타이머</title>
+    <meta name="description" content="메뉴바·알림·항상 위에 떠 있는 미니멀 타이머" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>:root{--bg:#0f172a;--bg2:#111827;--card:#0b1220;--text:#e5e7eb;--muted:#94a3b8;--brand:#2563eb;--max:1100px}*{box-sizing:border-box}html,body{margin:0;padding:0;background:linear-gradient(135deg,#0f172a,#1e293b);color:var(--text);font-family:Pretendard,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif}.container{max-width:var(--max);margin:0 auto;padding:0 20px}.nav{position:sticky;top:0;background:rgba(11,18,32,.6);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid rgba(255,255,255,.06);z-index:10}.nav__inner{display:flex;align-items:center;justify-content:space-between;height:64px}.brand{font-weight:700}.nav__links a{color:var(--text);text-decoration:none;margin-left:20px;opacity:.9}.btn{display:inline-block;padding:12px 18px;border-radius:10px;text-decoration:none;border:1px solid rgba(255,255,255,.12);color:var(--text)}.btn--primary{background:var(--brand);border-color:transparent}.btn--ghost{background:transparent}.hero{padding:80px 0 40px}.hero__grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}.hero h1{font-size:44px;margin:0 0 12px}.subtitle{color:var(--muted);margin:0 0 24px}.hero__art img{width:100%;height:auto;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.35)}.features{padding:40px 0}.features__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}.feature{background:rgba(11,18,32,.6);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px}.feature__icon{font-size:22px;margin-bottom:6px}.gallery{padding:20px 0 40px}.gallery__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.gallery img{width:100%;height:auto;border-radius:16px;box-shadow:0 12px 36px rgba(0,0,0,.35)}.gallery figcaption{color:var(--muted);margin-top:8px;font-size:14px}.cta__bottom{padding:40px 0}.cta__inner{background:rgba(11,18,32,.7);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px;display:flex;align-items:center;justify-content:space-between}.footer{padding:40px 0}.footer__inner{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.08);padding-top:20px}@media (max-width:960px){.hero__grid{grid-template-columns:1fr}.features__grid{grid-template-columns:repeat(2,1fr)}.gallery__grid{grid-template-columns:1fr}}</style>
+  </head>
+  <body>
+    <header class="nav">
+      <div class="container nav__inner">
+        <div class="brand">주먹밥</div>
+        <nav class="nav__links">
+          <a href="#features">기능</a>
+          <a href="#gallery">미리보기</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero__grid">
+          <div class="hero__copy">
+            <h1>플로팅 포커스 타이머</h1>
+            <p class="subtitle">메뉴바에서 시간 확인, 알림으로 세션 종료. 작업을 가리지 않는 미니멀 UI.</p>
+          </div>
+          <div class="hero__art">
+            <img src="../Mockups/01_menu_bar.svg" alt="메뉴바에서 한눈에 남은 시간" />
+          </div>
+        </div>
+      </section>
+
+      <section class="features" id="features">
+        <div class="container">
+          <div class="features__grid">
+            <article class="feature">
+              <div class="feature__icon">⌚</div>
+              <h3>메뉴바 표시</h3>
+              <p>남은 시간을 메뉴바에서 즉시 확인하세요.</p>
+            </article>
+            <article class="feature">
+              <div class="feature__icon">⬆️</div>
+              <h3>항상 위</h3>
+              <p>작업 위에 가볍게 떠 있는 플로팅 타이머.</p>
+            </article>
+            <article class="feature">
+              <div class="feature__icon">🔔</div>
+              <h3>세션 알림</h3>
+              <p>세션이 끝나면 배너/사운드로 알려드립니다.</p>
+            </article>
+            <article class="feature">
+              <div class="feature__icon">⚙️</div>
+              <h3>간단한 설정</h3>
+              <p>프리셋·컨트롤·볼륨·플로팅 표시를 직관적으로.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="gallery" id="gallery">
+        <div class="container">
+          <div class="gallery__grid">
+            <figure>
+              <img src="../Mockups/02_floating.svg" alt="플로팅 타이머" />
+              <figcaption>작고 가벼운 플로팅 타이머</figcaption>
+            </figure>
+            <figure>
+              <img src="../Mockups/04_settings.svg" alt="설정 팝오버" />
+              <figcaption>필요한 설정만 간단하게</figcaption>
+            </figure>
+            <figure>
+              <img src="../Mockups/05_notification.svg" alt="세션 종료 알림" />
+              <figcaption>세션 종료는 알림으로</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta__bottom">
+        <div class="container cta__inner">
+          <h2>지금 바로 집중을 시작하세요</h2>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div>© 2025 woobottle</div>
+      </div>
+    </footer>
+  </body>
+  </html>
+
+

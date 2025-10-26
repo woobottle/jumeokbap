@@ -13,7 +13,6 @@
 		02A90FDF2E9557EC00729113 /* JumeokbapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A90FCF2E9557EC00729113 /* JumeokbapApp.swift */; };
 		02A90FE02E9557EC00729113 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A90FD12E9557EC00729113 /* SettingsView.swift */; };
 		02A90FE12E9557EC00729113 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A90FD22E9557EC00729113 /* TimerManager.swift */; };
-        
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -438,13 +437,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-                CODE_SIGN_ENTITLEMENTS = Jumeokbap/Jumeokbap.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Jumeokbap/Jumeokbap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 54L4M92H9T;
-                EXECUTABLE_NAME = jumeokbap;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				EXECUTABLE_NAME = jumeokbap;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Jumeokbap/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "주먹밥";
@@ -463,7 +462,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.woobottle.jumeokbap;
 				PRODUCT_NAME = jumeokbap;
 				REGISTER_APP_GROUPS = YES;
@@ -482,13 +481,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-                CODE_SIGN_ENTITLEMENTS = Jumeokbap/Jumeokbap.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Jumeokbap/Jumeokbap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 54L4M92H9T;
-                EXECUTABLE_NAME = jumeokbap;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				EXECUTABLE_NAME = jumeokbap;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Jumeokbap/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "주먹밥";
@@ -507,7 +506,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.woobottle.jumeokbap;
 				PRODUCT_NAME = jumeokbap;
 				REGISTER_APP_GROUPS = YES;

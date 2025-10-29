@@ -29,14 +29,51 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         updateStatusBarTitle()
 
         if let button = statusItem.button {
-            button.action = #selector(togglePopover)
+            button.action = #selector(toggleMenu)
             button.target = self
         }
+
+        // 메뉴 설정
+        setupMenu()
 
         // TimerManager의 remaining 변경을 관찰해서 메뉴 바 업데이트
         timerManager.onRemainingChanged = { [weak self] in
             self?.updateStatusBarTitle()
         }
+    }
+
+    // 메뉴 설정
+    func setupMenu() {
+        let menu = NSMenu()
+        
+        // Settings 메뉴 항목
+        let settingsItem = NSMenuItem(title: "Settings", action: #selector(openSettings), keyEquivalent: ",")
+        settingsItem.target = self
+        menu.addItem(settingsItem)
+        
+        // 구분선
+        menu.addItem(NSMenuItem.separator())
+        
+        // Quit 메뉴 항목
+        let quitItem = NSMenuItem(title: "Quit Jumeokbap", action: #selector(quitApp), keyEquivalent: "q")
+        quitItem.target = self
+        menu.addItem(quitItem)
+        
+        statusItem.menu = menu
+    }
+
+    @objc func toggleMenu() {
+        // 메뉴는 자동으로 표시됨
+    }
+
+    @objc func openSettings() {
+        if let button = statusItem.button {
+            popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+        }
+    }
+
+    @objc func quitApp() {
+        NSApplication.shared.terminate(nil)
     }
 
     func updateStatusBarTitle() {
@@ -51,16 +88,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         popover.behavior = .transient
         popover.contentSize = NSSize(width: 300, height: 280)
         popover.contentViewController = NSHostingController(rootView: SettingsView(timerManager: timerManager))
-    }
-
-    @objc func togglePopover() {
-        if let button = statusItem.button {
-            if popover.isShown {
-                popover.performClose(nil)
-            } else {
-                popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
-            }
-        }
     }
 
     // 항상 위 플로팅 타이머

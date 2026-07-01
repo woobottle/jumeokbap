@@ -241,7 +241,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         // 앱이 포그라운드에 있을 때도 알림 표시 및 소리 재생
-        completionHandler([.alert, .sound, .badge])
+        // (.alert는 macOS 11.0에서 deprecated → .banner + .list 사용)
+        completionHandler([.banner, .list, .sound, .badge])
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {

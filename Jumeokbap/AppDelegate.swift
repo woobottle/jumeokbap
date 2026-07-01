@@ -4,7 +4,7 @@ import UserNotifications
 
 
 // MARK: - AppDelegate (Jumeokbap)
-class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDelegate {
     var statusItem: NSStatusItem!
     var popover: NSPopover!
     var floatingWindow: NSWindow?
@@ -230,36 +230,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                 print("UNUserNotificationCenter 권한 거부됨")
             }
         }
-
-        // NSUserNotificationCenter 설정 (macOS에서 더 확실한 알림 표시를 위해)
-        NSUserNotificationCenter.default.delegate = self
-
-        // 앱이 포그라운드에 있을 때도 알림 표시되도록 설정
-        DispatchQueue.main.async {
-            NSApplication.shared.registerForRemoteNotifications()
-        }
     }
 
     func setupAppIcon() {
         // 앱 아이콘을 TimerManager에 설정 (알림에 표시하기 위해)
         timerManager.appIconImage = NSApp?.applicationIconImage
-    }
-
-    // MARK: - NSUserNotificationCenterDelegate
-
-    func userNotificationCenter(_ center: NSUserNotificationCenter, didDeliver notification: NSUserNotification) {
-        print("알림이 성공적으로 전달됨: \(notification.title ?? "")")
-    }
-
-    func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
-        print("알림이 클릭됨: \(notification.title ?? "")")
-        // 알림 클릭 시 앱을 활성화
-        NSApplication.shared.activate(ignoringOtherApps: true)
-    }
-
-    func userNotificationCenter(_ center: NSUserNotificationCenter, shouldPresent notification: NSUserNotification) -> Bool {
-        // 앱이 포그라운드에 있을 때도 알림 표시
-        return true
     }
 
     // MARK: - UNUserNotificationCenterDelegate

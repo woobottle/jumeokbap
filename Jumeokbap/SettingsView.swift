@@ -73,14 +73,6 @@ struct SettingsView: View {
 
             Divider()
 
-            Text("alarm volume:").font(.headline)
-            Slider(value: $timerManager.alarmVolume, in: 0...1)
-            Toggle("automatically mute after 5 seconds", isOn: $timerManager.autoMute)
-
-            Divider()
-
-
-
             Toggle("floating display", isOn: $timerManager.showFloatingDisplay)
 
             Divider()

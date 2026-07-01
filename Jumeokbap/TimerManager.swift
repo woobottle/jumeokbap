@@ -13,8 +13,6 @@ enum TimerPhase: Equatable {
 final class TimerManager: ObservableObject {
     private enum Keys {
         static let selectedMinutes = "jb.selectedMinutes"
-        static let alarmVolume = "jb.alarmVolume"
-        static let autoMute = "jb.autoMute"
         static let showFloatingDisplay = "jb.showFloatingDisplay"
         static let floatingOriginX = "jb.floatingOriginX"
         static let floatingOriginY = "jb.floatingOriginY"
@@ -36,12 +34,6 @@ final class TimerManager: ObservableObject {
     var onRemainingChanged: (() -> Void)?
     @Published var selectedMinutes = 5 {
         didSet { defaults.set(selectedMinutes, forKey: Keys.selectedMinutes) }
-    }
-    @Published var alarmVolume: Double = 0.5 {
-        didSet { defaults.set(alarmVolume, forKey: Keys.alarmVolume) }
-    }
-    @Published var autoMute = false {
-        didSet { defaults.set(autoMute, forKey: Keys.autoMute) }
     }
     @Published var showFloatingDisplay = true {
         didSet {
@@ -83,8 +75,6 @@ final class TimerManager: ObservableObject {
         self.defaults = defaults
         defaults.register(defaults: [
             Keys.selectedMinutes: 5,
-            Keys.alarmVolume: 0.5,
-            Keys.autoMute: false,
             Keys.showFloatingDisplay: true,
             Keys.pomodoroEnabled: false,
             Keys.focusMinutes: 25,
@@ -95,8 +85,6 @@ final class TimerManager: ObservableObject {
         // 저장된 값 복원. Swift에서 프로퍼티 옵저버(didSet)는 소유 클래스의
         // init 내 대입에서는 발동하지 않으므로, register된 기본값+저장값을 읽어 대입한다.
         selectedMinutes = defaults.integer(forKey: Keys.selectedMinutes)
-        alarmVolume = defaults.double(forKey: Keys.alarmVolume)
-        autoMute = defaults.bool(forKey: Keys.autoMute)
         showFloatingDisplay = defaults.bool(forKey: Keys.showFloatingDisplay)
         pomodoroEnabled = defaults.bool(forKey: Keys.pomodoroEnabled)
         focusMinutes = defaults.integer(forKey: Keys.focusMinutes)
@@ -221,16 +209,6 @@ final class TimerManager: ObservableObject {
             }
         }
         #endif
-
-        // NSUserNotification도 함께 사용 (호환성 유지)
-        let notification = NSUserNotification()
-        notification.title = title
-        notification.informativeText = body
-        notification.soundName = NSUserNotificationDefaultSoundName
-        notification.deliveryDate = Date()
-
-        // 알림 즉시 표시
-        NSUserNotificationCenter.default.deliver(notification)
 
         // 테스트용 콜백 호출
         onNotificationSent?()

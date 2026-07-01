@@ -4,6 +4,11 @@ import UserNotifications
 import AppKit
 #endif
 
+// MARK: - TimerPhase (Jumeokbap)
+enum TimerPhase: Equatable {
+    case focus, shortBreak, longBreak
+}
+
 // MARK: - TimerManager (Jumeokbap)
 final class TimerManager: ObservableObject {
     private enum Keys {
@@ -13,6 +18,11 @@ final class TimerManager: ObservableObject {
         static let showFloatingDisplay = "jb.showFloatingDisplay"
         static let floatingOriginX = "jb.floatingOriginX"
         static let floatingOriginY = "jb.floatingOriginY"
+        static let pomodoroEnabled = "jb.pomodoroEnabled"
+        static let focusMinutes = "jb.focusMinutes"
+        static let shortBreakMinutes = "jb.shortBreakMinutes"
+        static let longBreakMinutes = "jb.longBreakMinutes"
+        static let cyclesUntilLongBreak = "jb.cyclesUntilLongBreak"
     }
 
     private let defaults: UserDefaults
@@ -39,6 +49,28 @@ final class TimerManager: ObservableObject {
             onFloatingDisplayChanged?(showFloatingDisplay)
         }
     }
+
+    // 뽀모도로 사이클 설정 (영속)
+    @Published var pomodoroEnabled = false {
+        didSet { defaults.set(pomodoroEnabled, forKey: Keys.pomodoroEnabled) }
+    }
+    @Published var focusMinutes = 25 {
+        didSet { defaults.set(focusMinutes, forKey: Keys.focusMinutes) }
+    }
+    @Published var shortBreakMinutes = 5 {
+        didSet { defaults.set(shortBreakMinutes, forKey: Keys.shortBreakMinutes) }
+    }
+    @Published var longBreakMinutes = 15 {
+        didSet { defaults.set(longBreakMinutes, forKey: Keys.longBreakMinutes) }
+    }
+    @Published var cyclesUntilLongBreak = 4 {
+        didSet { defaults.set(cyclesUntilLongBreak, forKey: Keys.cyclesUntilLongBreak) }
+    }
+
+    // 뽀모도로 런타임 상태 (비영속)
+    @Published var currentPhase: TimerPhase = .focus
+    @Published var completedFocusSessions = 0
+
     var onFloatingDisplayChanged: ((Bool) -> Void)?
     var onDragWindow: ((CGSize) -> Void)?
     var onDragStart: (() -> Void)? = nil
@@ -54,6 +86,11 @@ final class TimerManager: ObservableObject {
             Keys.alarmVolume: 0.5,
             Keys.autoMute: false,
             Keys.showFloatingDisplay: true,
+            Keys.pomodoroEnabled: false,
+            Keys.focusMinutes: 25,
+            Keys.shortBreakMinutes: 5,
+            Keys.longBreakMinutes: 15,
+            Keys.cyclesUntilLongBreak: 4,
         ])
         // 저장된 값 복원. Swift에서 프로퍼티 옵저버(didSet)는 소유 클래스의
         // init 내 대입에서는 발동하지 않으므로, register된 기본값+저장값을 읽어 대입한다.
@@ -61,6 +98,11 @@ final class TimerManager: ObservableObject {
         alarmVolume = defaults.double(forKey: Keys.alarmVolume)
         autoMute = defaults.bool(forKey: Keys.autoMute)
         showFloatingDisplay = defaults.bool(forKey: Keys.showFloatingDisplay)
+        pomodoroEnabled = defaults.bool(forKey: Keys.pomodoroEnabled)
+        focusMinutes = defaults.integer(forKey: Keys.focusMinutes)
+        shortBreakMinutes = defaults.integer(forKey: Keys.shortBreakMinutes)
+        longBreakMinutes = defaults.integer(forKey: Keys.longBreakMinutes)
+        cyclesUntilLongBreak = defaults.integer(forKey: Keys.cyclesUntilLongBreak)
     }
 
     var savedFloatingOrigin: CGPoint? {
@@ -79,18 +121,60 @@ final class TimerManager: ObservableObject {
         String(format: "%02d:%02d", remaining / 60, remaining % 60)
     }
 
+    // 페이즈별 분
+    func phaseMinutes(_ phase: TimerPhase) -> Int {
+        switch phase {
+        case .focus: return focusMinutes
+        case .shortBreak: return shortBreakMinutes
+        case .longBreak: return longBreakMinutes
+        }
+    }
+
+    // 페이즈 전환 규칙 (순수 로직 — 테스트 용이)
+    func nextPhase(from phase: TimerPhase, sessions: Int) -> (phase: TimerPhase, sessions: Int) {
+        switch phase {
+        case .focus:
+            let updated = sessions + 1
+            return (updated >= cyclesUntilLongBreak ? .longBreak : .shortBreak, updated)
+        case .shortBreak:
+            return (.focus, sessions)
+        case .longBreak:
+            return (.focus, 0)
+        }
+    }
+
     func start() {
-        remaining = selectedMinutes * 60
+        if pomodoroEnabled {
+            currentPhase = .focus
+            completedFocusSessions = 0
+            remaining = phaseMinutes(.focus) * 60
+        } else {
+            remaining = selectedMinutes * 60
+        }
         isRunning = true
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             if self.remaining > 0 {
                 self.remaining -= 1
             } else {
-                self.stop()
-                self.sendNotification()
+                self.handlePhaseCompletion()
             }
         }
+    }
+
+    // remaining이 0에 도달했을 때: 단발은 종료, 뽀모도로는 다음 페이즈로 자동 전환
+    private func handlePhaseCompletion() {
+        guard pomodoroEnabled else {
+            stop()
+            sendNotification()
+            return
+        }
+        sendNotification(for: currentPhase)
+        let result = nextPhase(from: currentPhase, sessions: completedFocusSessions)
+        currentPhase = result.phase
+        completedFocusSessions = result.sessions
+        remaining = phaseMinutes(currentPhase) * 60
+        // 타이머는 계속 실행 (사용자가 정지할 때까지 순환)
     }
 
     func stop() {
@@ -102,14 +186,31 @@ final class TimerManager: ObservableObject {
     func reset() {
         stop()
         remaining = 0
+        currentPhase = .focus
+        completedFocusSessions = 0
     }
 
-    func sendNotification() {
+    // phase가 nil이면 단발 타이머 완료 알림, 있으면 해당 페이즈 종료 알림
+    func sendNotification(for phase: TimerPhase? = nil) {
+        let title: String
+        let body: String
+        switch phase {
+        case .focus:
+            title = "집중 완료!"
+            body = "잠깐 휴식하세요 ☕️"
+        case .shortBreak, .longBreak:
+            title = "휴식 끝!"
+            body = "다시 집중해볼까요 🍅"
+        case nil:
+            title = "⏰ \(selectedMinutes)분 완료!"
+            body = "휴식을 취하세요 ☕️"
+        }
+
         // UNUserNotificationCenter를 사용하여 앱 아이콘과 함께 알림 표시
         #if os(macOS)
         let content = UNMutableNotificationContent()
-        content.title = "⏰ \(selectedMinutes)분 완료!"
-        content.body = "휴식을 취하세요 ☕️"
+        content.title = title
+        content.body = body
         content.sound = UNNotificationSound.default
 
         // 알림 요청 생성 및 전송
@@ -123,8 +224,8 @@ final class TimerManager: ObservableObject {
 
         // NSUserNotification도 함께 사용 (호환성 유지)
         let notification = NSUserNotification()
-        notification.title = "⏰ \(selectedMinutes)분 완료!"
-        notification.informativeText = "휴식을 취하세요 ☕️"
+        notification.title = title
+        notification.informativeText = body
         notification.soundName = NSUserNotificationDefaultSoundName
         notification.deliveryDate = Date()
 

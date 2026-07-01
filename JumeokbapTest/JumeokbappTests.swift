@@ -118,4 +118,98 @@
          #expect(second.savedFloatingOrigin == CGPoint(x: 100, y: 200))
      }
 
+     // MARK: - Phase 2: 뽀모도로 사이클
+
+     @Test func nextPhaseFromFocusBeforeThresholdGoesShortBreak() async throws {
+         let m = TimerManager()
+         m.cyclesUntilLongBreak = 4
+         let r = m.nextPhase(from: .focus, sessions: 0)
+         #expect(r.phase == .shortBreak)
+         #expect(r.sessions == 1)
+     }
+
+     @Test func nextPhaseFromFocusAtThresholdGoesLongBreak() async throws {
+         let m = TimerManager()
+         m.cyclesUntilLongBreak = 4
+         let r = m.nextPhase(from: .focus, sessions: 3)
+         #expect(r.phase == .longBreak)
+         #expect(r.sessions == 4)
+     }
+
+     @Test func nextPhaseFromShortBreakGoesFocus() async throws {
+         let m = TimerManager()
+         let r = m.nextPhase(from: .shortBreak, sessions: 2)
+         #expect(r.phase == .focus)
+         #expect(r.sessions == 2)
+     }
+
+     @Test func nextPhaseFromLongBreakResetsSessions() async throws {
+         let m = TimerManager()
+         let r = m.nextPhase(from: .longBreak, sessions: 4)
+         #expect(r.phase == .focus)
+         #expect(r.sessions == 0)
+     }
+
+     @Test func phaseMinutesReturnsConfiguredValues() async throws {
+         let m = TimerManager()
+         m.focusMinutes = 25
+         m.shortBreakMinutes = 5
+         m.longBreakMinutes = 15
+         #expect(m.phaseMinutes(.focus) == 25)
+         #expect(m.phaseMinutes(.shortBreak) == 5)
+         #expect(m.phaseMinutes(.longBreak) == 15)
+     }
+
+     @Test func pomodoroDefaultsWhenNothingStored() async throws {
+         let (defaults, suite) = makeDefaults()
+         defer { defaults.removePersistentDomain(forName: suite) }
+         let m = TimerManager(defaults: defaults)
+         #expect(m.pomodoroEnabled == false)
+         #expect(m.focusMinutes == 25)
+         #expect(m.shortBreakMinutes == 5)
+         #expect(m.longBreakMinutes == 15)
+         #expect(m.cyclesUntilLongBreak == 4)
+     }
+
+     @Test func pomodoroSettingsPersist() async throws {
+         let (defaults, suite) = makeDefaults()
+         defer { defaults.removePersistentDomain(forName: suite) }
+         let first = TimerManager(defaults: defaults)
+         first.pomodoroEnabled = true
+         first.focusMinutes = 30
+         first.shortBreakMinutes = 6
+         first.longBreakMinutes = 20
+         first.cyclesUntilLongBreak = 3
+
+         let second = TimerManager(defaults: defaults)
+         #expect(second.pomodoroEnabled == true)
+         #expect(second.focusMinutes == 30)
+         #expect(second.shortBreakMinutes == 6)
+         #expect(second.longBreakMinutes == 20)
+         #expect(second.cyclesUntilLongBreak == 3)
+     }
+
+     @Test func startInSingleShotModeUsesSelectedMinutes() async throws {
+         let m = TimerManager()
+         m.pomodoroEnabled = false
+         m.selectedMinutes = 10
+         m.start()
+         #expect(m.remaining == 600)
+         #expect(m.currentPhase == .focus)
+         m.stop()
+     }
+
+     @Test func startInPomodoroModeInitializesFocusPhase() async throws {
+         let m = TimerManager()
+         m.pomodoroEnabled = true
+         m.focusMinutes = 25
+         m.completedFocusSessions = 3
+         m.currentPhase = .shortBreak
+         m.start()
+         #expect(m.currentPhase == .focus)
+         #expect(m.completedFocusSessions == 0)
+         #expect(m.remaining == 1500)
+         m.stop()
+     }
+
  }

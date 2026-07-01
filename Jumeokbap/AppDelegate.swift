@@ -1,6 +1,5 @@
 import SwiftUI
 import Swift
-import SwiftData
 import UserNotifications
 
 
@@ -141,15 +140,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     func saveInitialWindowPosition() {
         initialWindowOrigin = floatingWindow?.frame.origin
         lastDragLocation = nil // 드래그 시작 시 리셋
-    }
-
-    func moveFloatingWindow(by translation: CGSize) {
-        // 기존 상대 이동 방식(호환용) — 절대 마우스 추적을 우선 사용
-        guard let window = floatingWindow, let initialOrigin = initialWindowOrigin else { return }
-        var frame = window.frame
-        frame.origin.x = initialOrigin.x + translation.width
-        frame.origin.y = initialOrigin.y - translation.height
-        window.setFrame(frame, display: false)
     }
 
     // 절대 마우스 위치를 따라다니도록 준비: 마우스와 창 원점 간 오프셋 저장

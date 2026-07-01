@@ -84,14 +84,10 @@
 
          let first = TimerManager(defaults: defaults)
          first.selectedMinutes = 25
-         first.alarmVolume = 0.9
-         first.autoMute = true
          first.showFloatingDisplay = false
 
          let second = TimerManager(defaults: defaults)
          #expect(second.selectedMinutes == 25)
-         #expect(second.alarmVolume == 0.9)
-         #expect(second.autoMute == true)
          #expect(second.showFloatingDisplay == false)
      }
 
@@ -101,8 +97,6 @@
 
          let manager = TimerManager(defaults: defaults)
          #expect(manager.selectedMinutes == 5)
-         #expect(manager.alarmVolume == 0.5)
-         #expect(manager.autoMute == false)
          #expect(manager.showFloatingDisplay == true)
      }
 

@@ -1,6 +1,5 @@
 import SwiftUI
 import Swift
-import SwiftData
 import UserNotifications
 
 
@@ -98,9 +97,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         let windowSize = NSSize(width: 120, height: 60)
         let margin: CGFloat = 12
         let visible = NSScreen.main?.visibleFrame ?? NSRect(x: 0, y: 0, width: windowSize.width, height: windowSize.height)
-        let originX = visible.maxX - windowSize.width - margin
-        let originY = visible.maxY - windowSize.height - margin
-        let initialRect = NSRect(x: originX, y: originY, width: windowSize.width, height: windowSize.height)
+        let defaultOrigin = CGPoint(x: visible.maxX - windowSize.width - margin,
+                                    y: visible.maxY - windowSize.height - margin)
+        let restored = timerManager.savedFloatingOrigin
+            .map { clampToVisibleFrame($0, size: windowSize, in: visible) }
+        let origin = restored ?? defaultOrigin
+        let initialRect = NSRect(x: origin.x, y: origin.y, width: windowSize.width, height: windowSize.height)
 
         floatingWindow = NSWindow(
             contentRect: initialRect,
@@ -140,15 +142,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         lastDragLocation = nil // 드래그 시작 시 리셋
     }
 
-    func moveFloatingWindow(by translation: CGSize) {
-        // 기존 상대 이동 방식(호환용) — 절대 마우스 추적을 우선 사용
-        guard let window = floatingWindow, let initialOrigin = initialWindowOrigin else { return }
-        var frame = window.frame
-        frame.origin.x = initialOrigin.x + translation.width
-        frame.origin.y = initialOrigin.y - translation.height
-        window.setFrame(frame, display: false)
-    }
-
     // 절대 마우스 위치를 따라다니도록 준비: 마우스와 창 원점 간 오프셋 저장
     func prepareDragForMouseFollow() {
         guard let window = floatingWindow else { return }
@@ -167,6 +160,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         window.setFrame(frame, display: false)
     }
 
+    // 창 원점을 화면 작업 영역 안으로 클램프
+    func clampToVisibleFrame(_ origin: CGPoint, size: NSSize, in visible: NSRect) -> CGPoint {
+        let minX = visible.minX
+        let maxX = visible.maxX - size.width
+        let minY = visible.minY
+        let maxY = visible.maxY - size.height
+        return CGPoint(x: max(minX, min(maxX, origin.x)),
+                       y: max(minY, min(maxY, origin.y)))
+    }
+
     // 드래그 종료 시 화면 가장자리 스냅 + 화면 내부로 클램프
     func finishDrag() {
         guard let window = floatingWindow, let screen = NSScreen.main else { return }
@@ -179,10 +182,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         // 클램프: 창이 화면 밖으로 나가지 않도록 제한
         let minX = visible.minX
         let maxX = visible.maxX - frame.size.width
-        let minY = visible.minY
-        let maxY = visible.maxY - frame.size.height
-        frame.origin.x = max(minX, min(maxX, frame.origin.x))
-        frame.origin.y = max(minY, min(maxY, frame.origin.y))
+        frame.origin = clampToVisibleFrame(frame.origin, size: frame.size, in: visible)
 
         // 스냅: 좌/우 가장자리로 스냅 (여백 12)
         let snapMargin: CGFloat = 12
@@ -197,9 +197,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         }
 
         window.setFrame(frame, display: true, animate: true)
-        // 드래그 종료 후 기준점 업데이트
+        // 드래그 종료 후 기준점 업데이트 및 위치 영속화
         initialWindowOrigin = frame.origin
         dragOffsetFromMouse = nil
+        timerManager.saveFloatingOrigin(frame.origin)
     }
 
     func toggleFloatingDisplay(_ show: Bool) {

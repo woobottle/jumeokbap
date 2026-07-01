@@ -76,9 +76,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     }
 
     func updateStatusBarTitle() {
-        statusItem.button?.title = timerManager.isRunning
-            ? timerManager.formattedTime
-            : "주먹밥"
+        guard timerManager.isRunning else {
+            statusItem.button?.title = "주먹밥"
+            return
+        }
+        if timerManager.pomodoroEnabled {
+            let icon = timerManager.currentPhase == .focus ? "🍅" : "☕️"
+            statusItem.button?.title = "\(icon) \(timerManager.formattedTime)"
+        } else {
+            statusItem.button?.title = timerManager.formattedTime
+        }
     }
 
     // 팝오버 (설정창)

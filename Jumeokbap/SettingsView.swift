@@ -28,6 +28,29 @@ struct SettingsView: View {
 
             Divider()
 
+            Toggle("뽀모도로 모드", isOn: $timerManager.pomodoroEnabled)
+                .font(.headline)
+
+            if timerManager.pomodoroEnabled {
+                VStack(alignment: .leading, spacing: 8) {
+                    Stepper("집중 \(timerManager.focusMinutes)분", value: $timerManager.focusMinutes, in: 1...90)
+                    Stepper("짧은 휴식 \(timerManager.shortBreakMinutes)분", value: $timerManager.shortBreakMinutes, in: 1...30)
+                    Stepper("긴 휴식 \(timerManager.longBreakMinutes)분", value: $timerManager.longBreakMinutes, in: 1...60)
+                    Stepper("\(timerManager.cyclesUntilLongBreak)세션마다 긴 휴식", value: $timerManager.cyclesUntilLongBreak, in: 2...8)
+                    HStack(spacing: 4) {
+                        Text("진행:")
+                        ForEach(0..<timerManager.cyclesUntilLongBreak, id: \.self) { index in
+                            Text(index < timerManager.completedFocusSessions ? "●" : "○")
+                        }
+                    }
+                    .font(.system(size: 13))
+                    .foregroundColor(.secondary)
+                }
+                .padding(.leading, 4)
+            }
+
+            Divider()
+
             Text("timer controls:").font(.headline)
             HStack {
                 Button("시작") {

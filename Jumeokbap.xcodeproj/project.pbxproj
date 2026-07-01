@@ -13,6 +13,7 @@
 		02A90FDF2E9557EC00729113 /* JumeokbapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A90FCF2E9557EC00729113 /* JumeokbapApp.swift */; };
 		02A90FE02E9557EC00729113 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A90FD12E9557EC00729113 /* SettingsView.swift */; };
 		02A90FE12E9557EC00729113 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A90FD22E9557EC00729113 /* TimerManager.swift */; };
+		02A90FE22E9557EC00729113 /* JumeokbappTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A90FD92E9557EC00729113 /* JumeokbappTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -289,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02A90FE22E9557EC00729113 /* JumeokbappTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,7 +540,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/jumeokb.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/jumeokbap";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/jumeokbap.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/jumeokbap";
 				XROS_DEPLOYMENT_TARGET = 2.5;
 			};
 			name = Debug;
@@ -561,7 +563,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/jumeokb.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/jumeokbap";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/jumeokbap.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/jumeokbap";
 				XROS_DEPLOYMENT_TARGET = 2.5;
 			};
 			name = Release;

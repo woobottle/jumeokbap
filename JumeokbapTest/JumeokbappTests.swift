@@ -7,8 +7,9 @@
 
  import Testing
  import Foundation
+ import CoreGraphics
  import UserNotifications
-@testable import Jumeokbap
+@testable import jumeokbap
 
  struct JumeokbappTests {
 
@@ -68,6 +69,53 @@
          // 실제 알림 내용 검증은 UNUserNotificationCenter를 모의 객체로 교체해야 하지만,
          // 여기서는 sendNotification() 메서드가 에러 없이 실행되는지만 확인
          #expect(timerManager.selectedMinutes == testMinutes, "알림 전송 시 선택된 시간 설정이 유지되어야 합니다")
+     }
+
+     // 격리된 UserDefaults suite를 만들어 주입하는 헬퍼
+     private func makeDefaults() -> (UserDefaults, String) {
+         let suite = "jb.test.\(UUID().uuidString)"
+         let defaults = UserDefaults(suiteName: suite)!
+         return (defaults, suite)
+     }
+
+     @Test func settingsPersistAcrossInstances() async throws {
+         let (defaults, suite) = makeDefaults()
+         defer { defaults.removePersistentDomain(forName: suite) }
+
+         let first = TimerManager(defaults: defaults)
+         first.selectedMinutes = 25
+         first.alarmVolume = 0.9
+         first.autoMute = true
+         first.showFloatingDisplay = false
+
+         let second = TimerManager(defaults: defaults)
+         #expect(second.selectedMinutes == 25)
+         #expect(second.alarmVolume == 0.9)
+         #expect(second.autoMute == true)
+         #expect(second.showFloatingDisplay == false)
+     }
+
+     @Test func defaultsWhenNothingStored() async throws {
+         let (defaults, suite) = makeDefaults()
+         defer { defaults.removePersistentDomain(forName: suite) }
+
+         let manager = TimerManager(defaults: defaults)
+         #expect(manager.selectedMinutes == 5)
+         #expect(manager.alarmVolume == 0.5)
+         #expect(manager.autoMute == false)
+         #expect(manager.showFloatingDisplay == true)
+     }
+
+     @Test func floatingOriginRoundTrips() async throws {
+         let (defaults, suite) = makeDefaults()
+         defer { defaults.removePersistentDomain(forName: suite) }
+
+         let first = TimerManager(defaults: defaults)
+         #expect(first.savedFloatingOrigin == nil)
+         first.saveFloatingOrigin(CGPoint(x: 100, y: 200))
+
+         let second = TimerManager(defaults: defaults)
+         #expect(second.savedFloatingOrigin == CGPoint(x: 100, y: 200))
      }
 
  }

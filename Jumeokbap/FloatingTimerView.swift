@@ -7,10 +7,19 @@ struct FloatingTimerView: View {
     @State private var isHovering = false
     @State private var dragStartLocation: CGPoint?
 
+    // 뽀모도로 휴식 페이즈에는 색조를 살짝 다르게(짙은 청록)
+    private var baseColor: Color {
+        if timerManager.pomodoroEnabled,
+           timerManager.currentPhase == .shortBreak || timerManager.currentPhase == .longBreak {
+            return Color(red: 0.0, green: 0.28, blue: 0.30)
+        }
+        return Color.black
+    }
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
-                .fill(Color.black.opacity(isHovering ? 0.7 : 0.75))
+                .fill(baseColor.opacity(isHovering ? 0.7 : 0.75))
             Text(timerManager.formattedTime)
                 .font(.system(size: 28, weight: .semibold, design: .monospaced))
                 .foregroundColor(.white)

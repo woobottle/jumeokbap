@@ -44,9 +44,10 @@ Tips
 - 저작권: © 2025 woobottle
 - 카테고리: 생산성
 - 연령 등급: 4+
-- 지원 URL: `https://woobottle.com/support/jumeokbap`
-- 마케팅 URL: `https://woobottle.com/jumeokbap`
-- 개인정보: “주먹밥은 사용자의 개인 데이터를 수집하지 않습니다. 자세한 내용은 `https://woobottle.com/privacy` 참고.”
+- 지원 URL: `https://woo-bottle.com/jumeokbap/support.html`
+- 마케팅 URL: `https://woo-bottle.com/jumeokbap/`
+- 개인정보: “주먹밥은 사용자의 개인 데이터를 수집하지 않습니다. 자세한 내용은 `https://woo-bottle.com/jumeokbap/privacy.html` 참고.”
+- 이용약관: `https://woo-bottle.com/jumeokbap/terms.html`
 
 ## Metadata (English)
 
@@ -69,9 +70,10 @@ Tips
 - Copyright: © 2025 woobottle
 - Category: Productivity
 - Age Rating: 4+
-- Support URL: `https://woobottle.com/support/jumeokbap`
-- Marketing URL: `https://woobottle.com/jumeokbap`
-- Privacy: “Jumeokbap does not collect personal data. Details at `https://woobottle.com/privacy`.”
+- Support URL: `https://woo-bottle.com/jumeokbap/support.html`
+- Marketing URL: `https://woo-bottle.com/jumeokbap/`
+- Privacy: “Jumeokbap does not collect personal data. Details at `https://woo-bottle.com/jumeokbap/privacy.html`.”
+- Terms of Use: `https://woo-bottle.com/jumeokbap/terms.html`
 
 ## Screenshot guide
 

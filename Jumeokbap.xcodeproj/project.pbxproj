@@ -14,6 +14,9 @@
 		02A90FE02E9557EC00729113 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A90FD12E9557EC00729113 /* SettingsView.swift */; };
 		02A90FE12E9557EC00729113 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A90FD22E9557EC00729113 /* TimerManager.swift */; };
 		02A90FE22E9557EC00729113 /* JumeokbappTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A90FD92E9557EC00729113 /* JumeokbappTests.swift */; };
+		5F31602EE77C58EDFF212E4D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 57E8B3EB55094E887F3EBA67 /* FirebaseAnalytics */; };
+		6A6E537778B2E2F3841BC197 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8248048F26012FDFC5742D30 /* GoogleService-Info.plist */; };
+		CF3B86CE40C7D2F082CFEE7F /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 78E927CA1525DBD5B9D4D6A4 /* FirebaseCrashlytics */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +53,7 @@
 		02A90FD72E9557EC00729113 /* JumeokbappUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumeokbappUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		02A90FD92E9557EC00729113 /* JumeokbappTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumeokbappTests.swift; sourceTree = "<group>"; };
 		02A90FEA2E97A11700729113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8248048F26012FDFC5742D30 /* GoogleService-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F31602EE77C58EDFF212E4D /* FirebaseAnalytics in Frameworks */,
+				CF3B86CE40C7D2F082CFEE7F /* FirebaseCrashlytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +116,7 @@
 				02A90FCF2E9557EC00729113 /* JumeokbapApp.swift */,
 				02A90FD12E9557EC00729113 /* SettingsView.swift */,
 				02A90FD22E9557EC00729113 /* TimerManager.swift */,
+				8248048F26012FDFC5742D30 /* GoogleService-Info.plist */,
 			);
 			path = Jumeokbap;
 			sourceTree = "<group>";
@@ -133,6 +140,8 @@
 		};
 		02A90FDB2E9557EC00729113 /* Products */ = {
 			isa = PBXGroup;
+			children = (
+			);
 			name = Products;
 			sourceTree = "<group>";
 		};
@@ -146,6 +155,7 @@
 				021010332E954DC000BA02C0 /* Sources */,
 				021010342E954DC000BA02C0 /* Frameworks */,
 				021010352E954DC000BA02C0 /* Resources */,
+				95F70AF28292EE477603E3CB /* [Crashlytics] Upload dSYM */,
 			);
 			buildRules = (
 			);
@@ -153,6 +163,8 @@
 			);
 			name = jumeokb;
 			packageProductDependencies = (
+				57E8B3EB55094E887F3EBA67 /* FirebaseAnalytics */,
+				78E927CA1525DBD5B9D4D6A4 /* FirebaseCrashlytics */,
 			);
 			productName = jumeokb;
 			productReference = 021010372E954DC000BA02C0 /* jumeokbap.app */;
@@ -172,8 +184,6 @@
 				021010492E954DC100BA02C0 /* PBXTargetDependency */,
 			);
 			name = jumeokbTests;
-			packageProductDependencies = (
-			);
 			productName = jumeokbTests;
 			productReference = 021010472E954DC100BA02C0 /* jumeokbapTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -192,8 +202,6 @@
 				021010532E954DC100BA02C0 /* PBXTargetDependency */,
 			);
 			name = jumeokbUITests;
-			packageProductDependencies = (
-			);
 			productName = jumeokbUITests;
 			productReference = 021010512E954DC100BA02C0 /* jumeokbUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -230,6 +238,9 @@
 			);
 			mainGroup = 0210102E2E954DC000BA02C0;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				41519302CC370E8B3C6FF282 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 021010382E954DC000BA02C0 /* Products */;
 			projectDirPath = "";
@@ -254,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02A90FDD2E9557EC00729113 /* Assets.xcassets in Resources */,
+				6A6E537778B2E2F3841BC197 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +284,33 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		95F70AF28292EE477603E3CB /* [Crashlytics] Upload dSYM */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
+			);
+			name = "[Crashlytics] Upload dSYM";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Release(archive)에서만 dSYM을 올린다\nif [ \"$CONFIGURATION\" = \"Release\" ]; then\n  \"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		021010332E954DC000BA02C0 /* Sources */ = {
@@ -652,6 +691,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		41519302CC370E8B3C6FF282 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		57E8B3EB55094E887F3EBA67 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41519302CC370E8B3C6FF282 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		78E927CA1525DBD5B9D4D6A4 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41519302CC370E8B3C6FF282 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0210102F2E954DC000BA02C0 /* Project object */;
 }

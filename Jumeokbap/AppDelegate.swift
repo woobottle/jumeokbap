@@ -1,6 +1,7 @@
 import SwiftUI
 import Swift
 import UserNotifications
+import FirebaseCore
 
 
 // MARK: - AppDelegate (Jumeokbap)
@@ -14,6 +15,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     private var dragOffsetFromMouse: CGPoint?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        // Firebase: 자동 수집(세션·앱 버전·기기)과 Crashlytics 충돌 리포트만 쓴다(이벤트 추가 없음).
+        FirebaseApp.configure()
+
         setupStatusBar()
         setupPopover()
         setupFloatingTimer()

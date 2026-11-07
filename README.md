@@ -46,7 +46,7 @@ Tips
 - 연령 등급: 4+
 - 지원 URL: `https://woo-bottle.com/jumeokbap/support.html`
 - 마케팅 URL: `https://woo-bottle.com/jumeokbap/`
-- 개인정보: “주먹밥은 사용자의 개인 데이터를 수집하지 않습니다. 자세한 내용은 `https://woo-bottle.com/jumeokbap/privacy.html` 참고.”
+- 개인정보: “주먹밥은 이름·연락처 등 개인 데이터를 수집하지 않으며, 설정값은 기기에만 저장됩니다. 앱 개선을 위해 익명 이용 통계·충돌 기록을 수집합니다(Google Firebase). 자세한 내용은 `https://woo-bottle.com/jumeokbap/privacy.html` 참고.”
 - 이용약관: `https://woo-bottle.com/jumeokbap/terms.html`
 
 ## Metadata (English)

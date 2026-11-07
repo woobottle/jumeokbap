@@ -244,4 +244,16 @@
          #expect(consent.storedValue == false)
      }
 
+     @Test func analyticsConsentStoredOnDoesNotTouchFirebaseAtLaunch() async throws {
+         let suite = "AnalyticsConsentTests.\(UUID().uuidString)"
+         let defaults = UserDefaults(suiteName: suite)!
+         defer { defaults.removePersistentDomain(forName: suite) }
+         var applied: [Bool] = []
+         defaults.set("1", forKey: AnalyticsConsent.key)
+         AnalyticsConsent(defaults: defaults) { applied.append($0) }.applyStoredValue()
+         defaults.set("true", forKey: AnalyticsConsent.key)
+         AnalyticsConsent(defaults: defaults) { applied.append($0) }.applyStoredValue()
+         #expect(applied.isEmpty)
+     }
+
 }

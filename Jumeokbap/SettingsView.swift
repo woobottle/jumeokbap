@@ -6,7 +6,7 @@ import FirebaseCrashlytics
 /// "분석 데이터 수집" 설정(기본 켜짐). 끄면 Firebase Analytics·Crashlytics 수집을 둘 다 끈다.
 ///
 /// - 저장 형식은 UserDefaults 문자열 "1"(켬)/"0"(끔). 읽을 땐 "true"/"false"도 인정한다.
-/// - 앱 시작 때는 명시적으로 저장된 값만 적용한다. 값이 없으면 Firebase를 건드리지 않는다
+/// - 앱 시작 때는 저장값이 "0"(끔)일 때만 적용한다. "1"·값 없음이면 Firebase를 건드리지 않는다
 ///   — 끈 설정은 Firebase가 기기에 따로 저장해 두므로, true로 가정해 켜면 꺼 둔 수집이 다시 켜질 수 있다.
 /// - Firebase의 Swift API는 동기·무실패라 롤백할 실패 경로가 없다. 끌 때는 Firebase를 먼저 끄고 저장,
 ///   켤 때는 저장한 뒤 켠다(중간에 앱이 죽어도 꺼진 쪽이 남게).
@@ -34,10 +34,12 @@ final class AnalyticsConsent {
     /// 화면 표시용 값(저장값이 없으면 기본 켜짐).
     var isEnabled: Bool { storedValue ?? true }
 
-    /// 앱 시작 직후(FirebaseApp.configure() 다음) 한 번 호출.
+    /// 앱 시작 직후(FirebaseApp.configure() 다음) 한 번 호출. 저장값이 "0"(끔)일 때만 false를 적용한다.
+    /// "1"이거나 값이 없으면 아무것도 호출하지 않는다 — 켬은 Firebase가 기기에 이미 저장해 두므로 다시 적용할
+    /// 필요가 없고, 끄기 저장이 실패해 남은 예전 "1"이 수집을 다시 켜지 않게 하기 위해서다.
     func applyStoredValue() {
-        guard let saved = storedValue else { return }
-        applyToSDK(saved)
+        guard storedValue == false else { return }
+        applyToSDK(false)
     }
 
     func setEnabled(_ enabled: Bool) {

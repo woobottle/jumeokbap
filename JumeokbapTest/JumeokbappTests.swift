@@ -206,4 +206,54 @@
          m.stop()
      }
 
- }
+ 
+     // MARK: - 분석 데이터 수집 토글
+
+     @Test func analyticsConsentWithoutStoredValueDoesNotTouchFirebase() async throws {
+         let suite = "AnalyticsConsentTests.\(UUID().uuidString)"
+         let defaults = UserDefaults(suiteName: suite)!
+         defer { defaults.removePersistentDomain(forName: suite) }
+         var applied: [Bool] = []
+         let consent = AnalyticsConsent(defaults: defaults) { applied.append($0) }
+         #expect(consent.storedValue == nil)
+         #expect(consent.isEnabled) // 기본 켜짐으로 표시만
+         consent.applyStoredValue()
+         defaults.set("garbage", forKey: AnalyticsConsent.key)
+         consent.applyStoredValue()
+         #expect(applied.isEmpty)
+     }
+
+     @Test func analyticsConsentOffIsPersistedAndReappliedAtLaunch() async throws {
+         let suite = "AnalyticsConsentTests.\(UUID().uuidString)"
+         let defaults = UserDefaults(suiteName: suite)!
+         defer { defaults.removePersistentDomain(forName: suite) }
+         var applied: [Bool] = []
+         let consent = AnalyticsConsent(defaults: defaults) { applied.append($0) }
+         consent.setEnabled(false)
+         #expect(defaults.string(forKey: AnalyticsConsent.key) == "0")
+         #expect(applied == [false])
+
+         AnalyticsConsent(defaults: defaults) { applied.append($0) }.applyStoredValue()
+         #expect(applied == [false, false])
+
+         consent.setEnabled(true)
+         #expect(defaults.string(forKey: AnalyticsConsent.key) == "1")
+         #expect(applied.last == true)
+
+         defaults.set("false", forKey: AnalyticsConsent.key)
+         #expect(consent.storedValue == false)
+     }
+
+     @Test func analyticsConsentStoredOnDoesNotTouchFirebaseAtLaunch() async throws {
+         let suite = "AnalyticsConsentTests.\(UUID().uuidString)"
+         let defaults = UserDefaults(suiteName: suite)!
+         defer { defaults.removePersistentDomain(forName: suite) }
+         var applied: [Bool] = []
+         defaults.set("1", forKey: AnalyticsConsent.key)
+         AnalyticsConsent(defaults: defaults) { applied.append($0) }.applyStoredValue()
+         defaults.set("true", forKey: AnalyticsConsent.key)
+         AnalyticsConsent(defaults: defaults) { applied.append($0) }.applyStoredValue()
+         #expect(applied.isEmpty)
+     }
+
+}
